@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.jeevLifeworks.entity.Student;
 
 /**
- * StudentRepository Interface represent the repository that interact with database 
+ * The StudentRepository interface provides CRUD operations for the Student entity.
+ * It interacts with the database using JPA.
  */
 @Repository
 public interface StudentRepository extends JpaRepository<Student,Long> {
