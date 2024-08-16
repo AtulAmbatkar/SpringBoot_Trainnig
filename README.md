@@ -1,8 +1,10 @@
 ## Employee Management Application
 This application manages employees records using Spring Boot, Spring Data JPA, and RESTful APIs.
 
-##User credentials
-with user creadintial user register then login to access the api end point
+
+## User credential
+> Register: Create a new user account.
+> Login: Authenticate to access the API endpoints.
 
 ## Prerequisites
 Before running this application, ensure you have the following installed:
@@ -44,6 +46,10 @@ mvn clean package
 
 ## Run the application:
 java -jar target/employees-management-spring-boot-1.0.jar
+
+## Additional Configuration
+Eureka Server: Ensure the Eureka Server is running and configured properly to register the service.
+Eureka Client: Make sure the application is set up as a Eureka client to communicate with the Eureka Server.
 
 ## Access the Application:
 The application will be accessible at http://localhost:8080/employees.
