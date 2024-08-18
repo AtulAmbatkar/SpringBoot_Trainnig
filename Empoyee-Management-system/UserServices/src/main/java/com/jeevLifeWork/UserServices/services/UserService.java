@@ -2,6 +2,7 @@ package com.jeevLifeWork.UserServices.services;
 
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.jeevLifeWork.UserServices.model.User;
 import com.jeevLifeWork.UserServices.model.UserPrinciple;
 import com.jeevLifeWork.UserServices.repository.IUserRepository;
+import com.jeevLifeWorks.UserServices.dto.SignupRequest;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -42,8 +44,12 @@ public class UserService implements UserDetailsService {
 	 * @param user the user object to be registered
 	 * @return a success message with the user's ID
 	 */
-	public String addNewUser(User user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword())); // Encode password
+	public String addNewUser(SignupRequest signupRequest) {
+		signupRequest.setPassword(passwordEncoder.encode(signupRequest.getPassword())); // Encode password
+		// Create a new Users entity
+				User user = new User();
+				BeanUtils.copyProperties(signupRequest, user);
+				user.setPassword(passwordEncoder.encode(user.getPassword())); // Encode password
 		int userId = repository.save(user).getId(); // Save user and get ID
 		return "User registered successfully with ID: " + userId;
 	}

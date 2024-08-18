@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jeevLifeWork.EmployeeServices.dto.ApiResponse;
 import com.jeevLifeWork.EmployeeServices.model.Employee;
 import com.jeevLifeWork.EmployeeServices.services.IEmployeeService;
 
@@ -45,13 +46,13 @@ public class EmployeeController {
 	 */
 	@GetMapping
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<Object> showAllEmployee() {
+	public ResponseEntity<?> showAllEmployee() {
 		try {
 			List<Employee> emplist = service.getAllEmployee();
 			if (emplist.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
-			return new ResponseEntity<>(emplist, HttpStatus.OK);
+			return ResponseEntity.ok(emplist);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -71,10 +72,10 @@ public class EmployeeController {
 	 */
 	@GetMapping("/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<String> showEmployee(@PathVariable("id") int eid) {
+	public ResponseEntity<?> showEmployee(@PathVariable("id") int eid) {
 		try {
 			Employee employee = service.getEmployeeById(eid);
-			return new ResponseEntity<>(employee.toString(), HttpStatus.OK);
+			return ResponseEntity.ok(employee);
 		} catch (IllegalArgumentException e) {
 			return new ResponseEntity<>("Employee with ID " + eid + " was not found", HttpStatus.NOT_FOUND);
 		}
@@ -93,12 +94,12 @@ public class EmployeeController {
 	 */
 	@PostMapping
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<String> createEmployee(@RequestBody Employee employee) {
+	public ResponseEntity<?> createEmployee(@RequestBody Employee employee) {
 		if (employee.getEname() == null) {
-			return new ResponseEntity<>("Invalid employee data", HttpStatus.BAD_REQUEST);
+			return  ResponseEntity.ok( HttpStatus.BAD_REQUEST);
 		}
 		String msg = service.addNewEmployee(employee);
-		return new ResponseEntity<>(msg, HttpStatus.CREATED);
+		return ResponseEntity.ok(new ApiResponse(msg));
 	}
 
 	/**
@@ -114,9 +115,9 @@ public class EmployeeController {
 	 */
 	@PutMapping("/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<String> updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
+	public ResponseEntity<?> updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
 		String msg = service.updateEmployeeById(id, employee);
-		return new ResponseEntity<>(msg, HttpStatus.OK);
+		return  ResponseEntity.ok(new ApiResponse(msg));
 	}
 
 	/**
@@ -129,8 +130,8 @@ public class EmployeeController {
 	 */
 	@DeleteMapping("/{id}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<String> deleteEmployee(@PathVariable int id) {
+	public ResponseEntity<?> deleteEmployee(@PathVariable int id) {
 		String msg = service.deleteEmployee(id);
-		return new ResponseEntity<>(msg, HttpStatus.OK);
+		return ResponseEntity.ok(new ApiResponse(msg));
 	}
 }

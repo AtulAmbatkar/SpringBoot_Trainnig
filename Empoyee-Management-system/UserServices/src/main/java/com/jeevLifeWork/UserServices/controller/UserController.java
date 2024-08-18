@@ -20,6 +20,7 @@ import com.jeevLifeWork.UserServices.model.User;
 import com.jeevLifeWork.UserServices.services.UserService;
 import com.jeevLifeWorks.UserServices.dto.LoginRequest;
 import com.jeevLifeWorks.UserServices.dto.LoginResponse;
+import com.jeevLifeWorks.UserServices.dto.SignupRequest;
 
 /**
  * UserController handles HTTP requests related to user operations including
@@ -58,10 +59,10 @@ public class UserController {
 	 */
 	@PostMapping("/register")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<String> registerUser(@RequestBody User user) {
-		System.out.println("user " + user);
-		String userDetails = userService.addNewUser(user);
-		return new ResponseEntity<String>(userDetails, HttpStatus.CREATED);
+	public ResponseEntity<?> registerUser(@RequestBody SignupRequest signupRequest){
+		System.out.println("user " + signupRequest);
+		String response = userService.addNewUser(signupRequest);
+		return ResponseEntity.ok(response);
 	}
 
 	/**
@@ -110,7 +111,7 @@ public class UserController {
 	 */
 	@GetMapping("/profile")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<User> getProfile(Principal principal) {
+	public ResponseEntity<?> getProfile(Principal principal) {
 		// Principal contains the username of the authenticated user
 		User user = userService.findAnyUsername(principal.getName());
 		if (user != null) {

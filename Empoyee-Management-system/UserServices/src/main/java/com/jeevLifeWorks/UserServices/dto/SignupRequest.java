@@ -5,6 +5,7 @@ package com.jeevLifeWorks.UserServices.dto;
  */
 public class SignupRequest {
 
+	private String email;
 	private String username;
 	private String password;
 
@@ -12,13 +13,21 @@ public class SignupRequest {
 		super();
 	}
 
-	public SignupRequest(String username, String password) {
+	public SignupRequest(String email, String username, String password) {
 		super();
+		this.email = email;
 		this.username = username;
 		this.password = password;
 	}
 
-	// setters and getters
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -35,10 +44,11 @@ public class SignupRequest {
 		this.password = password;
 	}
 
-	// toString
 	@Override
 	public String toString() {
-		return "SignupRequest [username=" + username + ", password=" + password + "]";
+		return "SignupRequest [email=" + email + ", username=" + username + ", password=" + password + "]";
 	}
+
+	
 
 }

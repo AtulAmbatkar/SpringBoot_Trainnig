@@ -1,0 +1,25 @@
+<div class="parent">
+  <div class="container">
+  <h2>Add Employee</h2>
+  <form [formGroup]="addEmployee" (ngSubmit)="submitForm()">
+    <div class="form-group">
+      <label for="ename">Employee Name</label>
+      <input type="text" class="form-control" id="ename" formControlName="ename" />
+    </div>
+    <div class="form-group">
+      <label for="department">Department</label>
+      <input type="text" class="form-control" id="department" formControlName="department" />
+    </div>
+    <div class="form-group">
+      <label for="position">Position</label>
+      <input type="text" class="form-control" id="position" formControlName="position" />
+    </div>
+    <div class="form-group">
+      <label for="salary">Salary</label>
+      <input type="text" class="form-control" id="salary" formControlName="salary" />
+    </div>
+    <button type="submit" class="btn btn-primary">Add Employee</button>
+    <p class="message"><a href="/dashboard">Go to Dashboard</a></p>
+  </form>
+</div>
+</div>

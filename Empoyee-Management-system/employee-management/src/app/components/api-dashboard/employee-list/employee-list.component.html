@@ -1,0 +1,37 @@
+<div class="parent">
+    <div class="container">
+    <h2>Employee List</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Position</th>
+          <th>Salary</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employeeList; let i = index">
+          <td>{{ employee.eid }}</td>
+          <td>{{ employee.ename }}</td>
+          <td>{{ employee.department }}</td>
+          <td>{{ employee.position }}</td>
+          <td>{{ employee.salary }}</td>
+          <td>
+            <button   class ="btn btn-warning btn-sm" (click)="onEdit(employee)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteEmployee(employee.eid)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="btn btn-sm">
+        <button class="btn btn-warning btn-sm" (click)="addEmployee()">Add-Employee</button>
+    </div>
+    <div class="btn btn-sm">
+        <button class="btn btn-warning btn-sm" routerLink="/dashboard">Dashboard</button>
+    </div>
+  </div>
+</div>
+  
